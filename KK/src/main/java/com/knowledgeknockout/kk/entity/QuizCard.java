@@ -3,6 +3,7 @@ package com.knowledgeknockout.kk.entity;
 import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.enums.QuizChoice;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
