@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/KK/KK.iml" filepath="$PROJECT_DIR$/KK/KK.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/KnowledgeKnockout.iml" filepath="$PROJECT_DIR$/.idea/KnowledgeKnockout.iml" />
     </modules>
   </component>
