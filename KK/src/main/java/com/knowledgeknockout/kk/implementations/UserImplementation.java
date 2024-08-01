@@ -26,6 +26,10 @@ public class UserImplementation implements UserInterface {
 
     @Override
     public void UpdateUser(User user) {
+    }
 
+    @Override
+    public boolean deleteAccount(long id) {
+        return false;
     }
 }
