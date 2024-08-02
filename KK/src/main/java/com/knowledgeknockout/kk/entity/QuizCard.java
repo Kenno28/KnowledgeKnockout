@@ -2,15 +2,13 @@ package com.knowledgeknockout.kk.entity;
 
 import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.enums.QuizChoice;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,7 +28,11 @@ public class QuizCard {
     @Column
     private QuizChoice quizChoice;
     @Column
-    private ArrayList<String> answers=new ArrayList<>();
+    private String answer;
+
+    @ElementCollection
+    private List<String> answerOptions = new ArrayList<>();
+
     @Column
     private long userId;
 
