@@ -23,8 +23,8 @@ public class User {
     @Column(unique = true)
     private String Username;
 
-    @Email
     @Column(unique = true)
+    @Email(message = "Email should be valid")
     private String EmailAddress;
 
     @Column

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import jakarta.validation.Valid;
 
 import java.util.regex.Pattern;
 
@@ -25,7 +26,7 @@ public class UserController implements UserEP {
      * @return
      */
     @Override
-    public ResponseEntity<?> createPlayer(User user) {
+    public ResponseEntity<?> createPlayer(@Valid User user) {
         if(user == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is null");
         }
@@ -35,7 +36,7 @@ public class UserController implements UserEP {
         Pattern pattern = Pattern.compile(regex);
 
         if (!pattern.matcher(passwordTest).matches()) {
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(400).body("Password did not satisfy the requirement");
         }
 
         try {
