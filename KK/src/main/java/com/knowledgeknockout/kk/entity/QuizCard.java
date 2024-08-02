@@ -38,4 +38,14 @@ public class QuizCard {
     @JoinColumn (name = "user_id")
     private User user;
 
+
+    public QuizCard(long id, String title, String question, Genre genre, QuizChoice quizChoice, String answer, User user) {
+        this.id = id;
+        this.title = title;
+        this.question = question;
+        this.genre = genre;
+        this.quizChoice = quizChoice;
+        this.answer = answer;
+        this.user = user;
+    }
 }

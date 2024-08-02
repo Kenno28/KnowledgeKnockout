@@ -15,10 +15,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .disable()
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/player/register").permitAll()
+
                         .anyRequest().authenticated()
                 );
 
