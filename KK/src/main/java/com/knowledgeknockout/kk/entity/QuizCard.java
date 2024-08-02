@@ -34,7 +34,8 @@ public class QuizCard {
     @ElementCollection
     private List<String> answerOptions;
 
-    @Column
-    private long userId;
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
 
 }
