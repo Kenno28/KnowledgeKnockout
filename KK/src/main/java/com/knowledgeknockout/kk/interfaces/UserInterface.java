@@ -13,7 +13,5 @@ public interface UserInterface {
 
     void UpdateUser(User user);
 
-    boolean deleteAccount(long id);
-
 }
 

@@ -34,18 +34,17 @@ public class QuizCard {
     @ElementCollection
     private List<String> answerOptions;
 
-    @ManyToOne
     @JoinColumn (name = "user_id")
-    private User user;
+    private int userId;
 
 
-    public QuizCard(long id, String title, String question, Genre genre, QuizChoice quizChoice, String answer, User user) {
+    public QuizCard(long id, String title, String question, Genre genre, QuizChoice quizChoice, String answer, int userId) {
         this.id = id;
         this.title = title;
         this.question = question;
         this.genre = genre;
         this.quizChoice = quizChoice;
         this.answer = answer;
-        this.user = user;
+        this.userId = userId;
     }
 }
