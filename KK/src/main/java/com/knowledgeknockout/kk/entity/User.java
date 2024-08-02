@@ -3,12 +3,17 @@ package com.knowledgeknockout.kk.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.Column;
+import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Email;
 
 @Table(name = "Player")
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -18,6 +23,7 @@ public class User {
     @Column(unique = true)
     private String Username;
 
+    @Email
     @Column(unique = true)
     private String EmailAddress;
 
@@ -32,4 +38,14 @@ public class User {
 
     @Column
     private Long profilePictureOid;
+
+
+    public User(String username, String emailAddress, String password) {
+        Username = username;
+        EmailAddress = emailAddress;
+        Password = password;
+        Coins = 0;
+        Verify = false;
+    }
+
 }
