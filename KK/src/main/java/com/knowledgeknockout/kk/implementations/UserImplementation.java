@@ -3,26 +3,26 @@ package com.knowledgeknockout.kk.implementations;
 import com.knowledgeknockout.kk.entity.User;
 import com.knowledgeknockout.kk.interfaces.UserInterface;
 import com.knowledgeknockout.kk.interfaces.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Component
 public class UserImplementation  implements UserInterface {
+    @Autowired
     private  UserRepository userRepository;
 
     @Override
-    public boolean register(String Email, String password, String Username) {
+    public boolean register(User user) {
 
-
-        if(Email.isEmpty() || password.isEmpty() || Username.isEmpty()){
-            throw new IllegalArgumentException("Email, password or User cannot be empty");
+        if(user.getEmailAddress().isEmpty() || user.getPassword().isEmpty() || user.getUsername().isEmpty()){
+            throw new IllegalArgumentException("Email, password or Username cannot be empty");
         }
 
         try {
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            password = bCryptPasswordEncoder.encode(password);
-            User user = new User(Email, password, Username);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             return true;
         }catch (Exception e){

@@ -1,4 +1,4 @@
-package MVC;
+package com.knowledgeknockout.kk.MVC;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/player/register").permitAll()
                         .anyRequest().authenticated()
                 );
 

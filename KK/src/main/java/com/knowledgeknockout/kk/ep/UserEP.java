@@ -17,6 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/player")
 public interface UserEP {
 
-    @PostMapping("")
+    @PostMapping("/register")
     ResponseEntity<?> createPlayer(@RequestBody User user);
 }

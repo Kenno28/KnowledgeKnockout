@@ -1,4 +1,4 @@
-package MVC;
+package com.knowledgeknockout.kk.MVC;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

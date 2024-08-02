@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -23,12 +22,12 @@ public class UserTests {
 
     @Test
     public void registerTest() throws Exception {
-        User user = new User("eray", "erayzor045@gmail.com", "123123");
+        User user = new User("eray", "erayzor045@gmail.com", "1231A23");
 
         ObjectMapper objectMapper = new ObjectMapper();
         String userJson = objectMapper.writeValueAsString(user);
 
-        mockMvc.perform(post("/register")
+        mockMvc.perform(post("/player/register")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(userJson))

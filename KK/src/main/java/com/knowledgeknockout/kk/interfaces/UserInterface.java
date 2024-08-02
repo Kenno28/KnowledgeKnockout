@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserInterface {
 
-    boolean register(String Email, String password, String Username);
+    boolean register(User user);
 
     boolean login(String username, String password);
 

@@ -39,7 +39,7 @@ public class UserController implements UserEP {
         }
 
         try {
-            Boolean registered= ui.register(user.getEmailAddress(), user.getPassword(), user.getUsername());
+            Boolean registered= ui.register(user);
 
             if(registered){
                 return ResponseEntity.status(HttpStatus.CREATED).build();

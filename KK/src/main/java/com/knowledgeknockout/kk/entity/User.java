@@ -46,6 +46,7 @@ public class User {
         Password = password;
         Coins = 0;
         Verify = false;
+        profilePictureOid = 0L;
     }
 
 }
