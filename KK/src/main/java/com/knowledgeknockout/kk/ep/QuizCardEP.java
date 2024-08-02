@@ -17,14 +17,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/quizCard")
 public interface QuizCardEP {
 
+    @PostMapping("/")
     ResponseEntity<?> createCustomer(@RequestBody QuizCard quizCard);
 
+    @DeleteMapping("/{id}")
     ResponseEntity<?> deleteCustomer(@PathVariable Long id);
 
+    @GetMapping("/")
     ResponseEntity <?> getQuizCard(@PathVariable Long id);
 
+    @PutMapping("/")
     ResponseEntity<?> updateQuizCard(@RequestBody QuizCard quizCard);
 
+    @GetMapping("/all")
     ResponseEntity<?> getAllQuizCards();
 
 }
