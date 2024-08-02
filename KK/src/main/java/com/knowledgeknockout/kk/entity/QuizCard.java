@@ -31,8 +31,8 @@ public class QuizCard {
     @Column
     private String answer;
 
-    @ElementCollection
-    private List<String> answerOptions = new ArrayList<>();
+    @Column
+    private String [] answerQuestions;
 
     @Column
     private long userId;
