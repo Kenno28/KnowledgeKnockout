@@ -8,6 +8,7 @@ import com.knowledgeknockout.kk.entity.User;
 import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.enums.QuizChoice;
 import com.knowledgeknockout.kk.implementations.QuizCardImplementation;
+import com.knowledgeknockout.kk.implementations.QuizSoloGame;
 import jakarta.validation.constraints.AssertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class QuizCardControllerTests {
     @Autowired
     private QuizCardImplementation quizCardImplementation;
 
+    @Autowired
+    private QuizSoloGame quizSoloGame;
+
     @Test
     public void postQuizCard() throws Exception {
         ArrayList<String> quizCards = new ArrayList<>();
@@ -59,9 +63,9 @@ public class QuizCardControllerTests {
         user.setVerify(true);
 
         QuizCard quizCard = new QuizCard();
-        quizCard.setTitle("Quiz Cardddsya");
-        quizCard.setQuestion("What is your namedscx?");
-        quizCard.setAnswer("Leventdawc");
+        quizCard.setTitle("qeqoen");
+        quizCard.setQuestion("bbbccd");
+        quizCard.setAnswer("daduijbwu");
         quizCard.setGenre(Genre.INFORMATICS);
         quizCard.setUserId(user.getId());
         quizCard.setQuizChoice(QuizChoice.MULTIPLE);
@@ -83,5 +87,13 @@ public class QuizCardControllerTests {
         List<QuizCard> foundQuizCards=quizCardImplementation.getQuizCardsGenre("INFORMATICS");
         assertNotNull(foundQuizCards);
         assertTrue(foundQuizCards.size()==3);
+    }
+
+    @Test
+    public void randomQuizCard() throws Exception {
+        List<QuizCard> randomQuizCards=quizSoloGame.getRandomQuizCards("INFORMATICS");
+        assertNotNull(randomQuizCards);
+        assertTrue(randomQuizCards.size()==10);
+        System.out.println(randomQuizCards);
     }
 }
