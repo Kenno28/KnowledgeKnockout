@@ -25,8 +25,10 @@ public class QuizCard {
     @Column
     private String question;
     @Column
+    @Enumerated(EnumType.STRING)
     private Genre genre;
     @Column
+    @Enumerated(EnumType.STRING)
     private QuizChoice quizChoice;
     @Column
     private String answer;

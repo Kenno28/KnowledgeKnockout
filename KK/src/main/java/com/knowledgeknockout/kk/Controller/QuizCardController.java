@@ -19,7 +19,7 @@ public class QuizCardController implements QuizCardEP {
 
     @Override
     public ResponseEntity<?> createQuizCard(QuizCard quizCard) {
-        if(quizCard == null) {
+        if(quizCard.getAnswer()==null || quizCard.getAnswerOptions() ==null||quizCard.getQuestion()==null|| quizCard.getGenre()==null||quizCard.getTitle()==null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         try {

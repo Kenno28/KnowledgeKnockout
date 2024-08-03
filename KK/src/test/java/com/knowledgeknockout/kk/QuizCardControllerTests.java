@@ -7,6 +7,8 @@ import com.knowledgeknockout.kk.entity.QuizCard;
 import com.knowledgeknockout.kk.entity.User;
 import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.enums.QuizChoice;
+import com.knowledgeknockout.kk.implementations.QuizCardImplementation;
+import jakarta.validation.constraints.AssertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,7 +18,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -35,6 +40,8 @@ public class QuizCardControllerTests {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private QuizCardImplementation quizCardImplementation;
 
     @Test
     public void postQuizCard() throws Exception {
@@ -45,16 +52,16 @@ public class QuizCardControllerTests {
         quizCards.add("levo");
 
         User user= new User();
-        user.setUsername("Xalo");
+        user.setUsername("Xassxo");
         user.setPassword("Xalo");
         user.setEmailAddress("xalo@gmail.com");
         user.setCoins(10);
         user.setVerify(true);
 
         QuizCard quizCard = new QuizCard();
-        quizCard.setTitle("Quiz Card");
-        quizCard.setQuestion("What is your name?");
-        quizCard.setAnswer("Levent");
+        quizCard.setTitle("Quiz Cardddsya");
+        quizCard.setQuestion("What is your namedscx?");
+        quizCard.setAnswer("Leventdawc");
         quizCard.setGenre(Genre.INFORMATICS);
         quizCard.setUserId(user.getId());
         quizCard.setQuizChoice(QuizChoice.MULTIPLE);
@@ -68,5 +75,13 @@ public class QuizCardControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(quizJson))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void getQuizCardGenre() throws Exception {
+
+        List<QuizCard> foundQuizCards=quizCardImplementation.getQuizCardsGenre("INFORMATICS");
+        assertNotNull(foundQuizCards);
+        assertTrue(foundQuizCards.size()==3);
     }
 }
