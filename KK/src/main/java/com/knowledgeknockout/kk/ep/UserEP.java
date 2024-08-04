@@ -19,4 +19,13 @@ public interface UserEP {
 
     @PostMapping("/register")
     ResponseEntity<?> createPlayer(@RequestBody User user);
+
+    @PutMapping("/")
+    ResponseEntity<?> updatePlayer(@RequestBody User user);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deletePlayer(@PathVariable Integer id);
+
+    @GetMapping("/{id}")
+    ResponseEntity<?> getPlayer(@PathVariable Integer id);
 }

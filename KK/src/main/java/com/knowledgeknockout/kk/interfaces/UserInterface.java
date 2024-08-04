@@ -13,5 +13,8 @@ public interface UserInterface {
 
     void UpdateUser(User user);
 
+    boolean deleteUser(int id);
+
+    User getUser(int id);
 }
 

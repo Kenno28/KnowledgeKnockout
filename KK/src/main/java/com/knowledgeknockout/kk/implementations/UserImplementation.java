@@ -26,10 +26,10 @@ public class UserImplementation  implements UserInterface {
             userRepository.save(user);
             return true;
         }catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }
-
 
     @Override
     public boolean login(String username, String password) {
@@ -43,6 +43,54 @@ public class UserImplementation  implements UserInterface {
 
     @Override
     public void UpdateUser(User user) {
+        if(user.getEmailAddress().isEmpty() || user.getPassword().isEmpty() || user.getUsername().isEmpty()){
+            throw new IllegalArgumentException("Email, password or Username cannot be empty");
+        }else if(user.getId() == null){
+            throw new IllegalArgumentException("Id cannot be null");
+        }
+
+        try {
+            if(userRepository.existsById(user.getId())){
+                userRepository.save(user);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean deleteUser(int id) {
+        if(!userRepository.existsById(id)){
+            throw new IllegalArgumentException("ID not found");
+        }
+
+        try {
+            userRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public User getUser(int id) {
+        if(!userRepository.existsById(id)){
+            throw new IllegalArgumentException("ID not found");
+        }
+
+        return userRepository.findById(id).get();
+    }
+
+
 
 }

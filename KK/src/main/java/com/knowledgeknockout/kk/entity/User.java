@@ -1,11 +1,8 @@
 package com.knowledgeknockout.kk.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import jakarta.persistence.Column;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.Email;
 
@@ -17,8 +14,9 @@ import jakarta.validation.constraints.Email;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private int id;
+    private Integer id;
 
     @Column(unique = true)
     private String Username;
