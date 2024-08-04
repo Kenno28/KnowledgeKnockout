@@ -38,8 +38,6 @@ public class QuizSoloGame {
                 }
             }
         }
-        //Berechnen der gewonnen coins wenn über 50% wr gewonnen
-        //TODO: updaten von usern implementieren sodass die coins gespeichert werden in db
         double wr=0;
         if(counter==0){
             return new QuizResult(user.get().getId(),wr,0,false);
@@ -72,7 +70,7 @@ public class QuizSoloGame {
     }
 
     public List<QuizCard> getRandomQuizCards(String genre){
-
+        //Shuffle hätte man benutzen können
         try {
             Random random = new Random();
 

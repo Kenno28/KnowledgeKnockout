@@ -1,7 +1,11 @@
 package com.knowledgeknockout.kk.Controller;
 
+import com.knowledgeknockout.kk.DTO.SoloQuizDTO;
+import com.knowledgeknockout.kk.Help.QuizResult;
 import com.knowledgeknockout.kk.entity.QuizCard;
+import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.ep.QuizCardEP;
+import com.knowledgeknockout.kk.implementations.QuizSoloGame;
 import com.knowledgeknockout.kk.interfaces.QuizCardJDBC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +20,9 @@ import java.util.Optional;
 public class QuizCardController implements QuizCardEP {
     @Autowired
     QuizCardJDBC quizCardJDBC;
+
+    @Autowired
+    QuizSoloGame soloGame;
 
     @Override
     public ResponseEntity<?> createQuizCard(QuizCard quizCard) {
@@ -90,6 +97,38 @@ public class QuizCardController implements QuizCardEP {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> soloQuiz(SoloQuizDTO soloQuizDTO) {
+
+        try {
+            QuizResult result =soloGame.soloQuiz(soloQuizDTO.getUser(),soloQuizDTO.getAnswers());
+            if(result!=null) {
+                return ResponseEntity.status(HttpStatus.OK).body(result);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @Override
+    public ResponseEntity<?> soloQuizRandomQuestion(String genre) {
+
+        try {
+            List<QuizCard> quizCards =soloGame.getRandomQuizCards(genre);
+            if(quizCards!=null) {
+                return ResponseEntity.status(HttpStatus.OK).body(quizCards);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
