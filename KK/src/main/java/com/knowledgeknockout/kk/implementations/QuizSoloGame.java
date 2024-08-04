@@ -1,5 +1,6 @@
 package com.knowledgeknockout.kk.implementations;
 
+import com.knowledgeknockout.kk.Help.QuizResult;
 import com.knowledgeknockout.kk.entity.QuizCard;
 import com.knowledgeknockout.kk.entity.User;
 import com.knowledgeknockout.kk.enums.Genre;
@@ -22,9 +23,36 @@ public class QuizSoloGame {
     UserRepository userRepository;
 
 
-    public boolean soloQuiz (User user, Map<Integer,String> answers){
+    public QuizResult soloQuiz (Optional <User> user, Map<Long,String> answers){
+        //Überprüfen ob die antworten der quizes richtig sind und counter id
+        //Coins berechnen wenn winrate über 50%
+        int counter=0;
 
-        return false;
+        //Gucken ob antwort mit der gewollten antwort richtig ist
+        for (Long key:answers.keySet()) {
+            Optional<QuizCard> foundQuizCard=quizCardJDBC.findById(key);
+            if(foundQuizCard.isPresent()){
+                String answer=foundQuizCard.get().getAnswer();
+                if(answer.equals(answers.get(key))){
+                    counter++;
+                }
+            }
+        }
+        //Berechnen der gewonnen coins wenn über 50% wr gewonnen
+        double wr=0;
+        if(counter==0){
+            return new QuizResult(user.get().getId(),wr,0,false);
+        }
+        if(counter>0){
+            wr= ((double) counter/ answers.size()) * 100;
+        }
+        if(wr>50){
+            return new QuizResult(user.get().getId(),wr,100,true);
+        }
+        else{
+            return new QuizResult(user.get().getId(),wr,0,false);
+        }
+
     }
 
     public List<QuizCard> getRandomQuizCards(String genre){
