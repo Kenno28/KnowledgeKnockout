@@ -39,6 +39,7 @@ public class QuizSoloGame {
             }
         }
         //Berechnen der gewonnen coins wenn über 50% wr gewonnen
+        //TODO: updaten von usern implementieren sodass die coins gespeichert werden in db
         double wr=0;
         if(counter==0){
             return new QuizResult(user.get().getId(),wr,0,false);
@@ -46,8 +47,23 @@ public class QuizSoloGame {
         if(counter>0){
             wr= ((double) counter/ answers.size()) * 100;
         }
-        if(wr>50){
-            return new QuizResult(user.get().getId(),wr,100,true);
+        if(wr>50 && wr<70 ){
+            int coinsSum=user.get().getCoins()+150;
+            user.get().setCoins(coinsSum);
+            userRepository.save(user.get());
+            return new QuizResult(user.get().getId(),wr,150,true);
+        }
+        if(wr>70 && wr<95 ){
+            int coinsSum=user.get().getCoins()+170;
+            user.get().setCoins(coinsSum);
+            userRepository.save(user.get());
+            return new QuizResult(user.get().getId(),wr,170,true);
+        }
+        if(wr>95 ){
+            int coinsSum=user.get().getCoins()+250;
+            user.get().setCoins(coinsSum);
+            userRepository.save(user.get());
+            return new QuizResult(user.get().getId(),wr,250,true);
         }
         else{
             return new QuizResult(user.get().getId(),wr,0,false);
