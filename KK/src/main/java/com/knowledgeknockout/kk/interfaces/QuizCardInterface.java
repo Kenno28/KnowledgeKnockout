@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface QuizCardInterface {
-  Optional<QuizCard> updateQuizCard(QuizCard quizCard);
+  Optional<QuizCard> updateQuizCard(Long id,QuizCard quizCard);
 
   List<QuizCard> getQuizCardsGenre(String genre);
 }

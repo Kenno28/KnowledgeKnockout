@@ -1,4 +1,4 @@
-package com.knowledgeknockout.kk;
+package com.knowledgeknockout.kk.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.knowledgeknockout.kk.entity.User;
