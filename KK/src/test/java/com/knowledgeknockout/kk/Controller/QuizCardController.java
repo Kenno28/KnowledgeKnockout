@@ -7,7 +7,7 @@ import com.knowledgeknockout.kk.entity.User;
 import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.enums.QuizChoice;
 import com.knowledgeknockout.kk.implementations.QuizCardImplementation;
-import com.knowledgeknockout.kk.implementations.QuizSoloGame;
+import com.knowledgeknockout.kk.Games.QuizSoloGame;
 import com.knowledgeknockout.kk.interfaces.QuizCardJDBC;
 import com.knowledgeknockout.kk.interfaces.UserRepository;
 import jakarta.transaction.Transactional;

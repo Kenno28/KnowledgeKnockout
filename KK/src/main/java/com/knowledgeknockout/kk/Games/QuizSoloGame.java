@@ -1,9 +1,9 @@
-package com.knowledgeknockout.kk.implementations;
+package com.knowledgeknockout.kk.Games;
 
 import com.knowledgeknockout.kk.Help.QuizResult;
 import com.knowledgeknockout.kk.entity.QuizCard;
 import com.knowledgeknockout.kk.entity.User;
-import com.knowledgeknockout.kk.enums.Genre;
+import com.knowledgeknockout.kk.implementations.QuizCardImplementation;
 import com.knowledgeknockout.kk.interfaces.QuizCardJDBC;
 import com.knowledgeknockout.kk.interfaces.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

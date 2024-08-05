@@ -5,12 +5,11 @@ import com.knowledgeknockout.kk.Help.QuizResult;
 import com.knowledgeknockout.kk.entity.QuizCard;
 import com.knowledgeknockout.kk.enums.Genre;
 import com.knowledgeknockout.kk.ep.QuizCardEP;
-import com.knowledgeknockout.kk.implementations.QuizSoloGame;
+import com.knowledgeknockout.kk.Games.QuizSoloGame;
 import com.knowledgeknockout.kk.interfaces.QuizCardJDBC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
