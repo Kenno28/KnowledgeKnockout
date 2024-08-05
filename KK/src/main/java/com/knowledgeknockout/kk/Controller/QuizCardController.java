@@ -120,13 +120,17 @@ public class QuizCardController implements QuizCardEP {
 
     @Override
     public ResponseEntity<?> soloQuizRandomQuestion(String genre) {
-
         try {
+            Genre validGenre = Genre.valueOf(genre.toUpperCase());
+
             List<QuizCard> quizCards =soloGame.getRandomQuizCards(genre);
             if(quizCards!=null) {
                 return ResponseEntity.status(HttpStatus.OK).body(quizCards);
             }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid genre specified.");
         }
         catch (Exception e){
             e.printStackTrace();

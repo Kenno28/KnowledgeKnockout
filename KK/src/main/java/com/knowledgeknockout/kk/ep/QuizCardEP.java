@@ -30,6 +30,6 @@ public interface QuizCardEP {
     @PutMapping("/soloQuiz")
     ResponseEntity<?> soloQuiz(@RequestBody SoloQuizDTO soloQuizDTO);
 
-    @GetMapping("/randomQuestion")
-    ResponseEntity<?> soloQuizRandomQuestion(@RequestParam String genre);
+    @GetMapping("/randomQuestion/{genre}")
+    ResponseEntity<?> soloQuizRandomQuestion(@PathVariable("genre") String genre);
 }

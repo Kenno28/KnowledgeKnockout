@@ -24,8 +24,12 @@ public class QuizSoloGame {
 
 
     public QuizResult soloQuiz (Optional <User> user, Map<Long,String> answers){
+        System.out.println(user.get()+"-------------------");
+        System.out.println("ABCS");
         //Überprüfen ob die antworten der quizes richtig sind und counter id
         //Coins berechnen wenn winrate über 50%
+        //TODO: rekusiven code verbessern eine methode erstellen
+        //TODO: controller Testen
         int counter=0;
 
         //Gucken ob antwort mit der gewollten antwort richtig ist
@@ -48,25 +52,31 @@ public class QuizSoloGame {
         if(wr>50 && wr<70 ){
             int coinsSum=user.get().getCoins()+150;
             user.get().setCoins(coinsSum);
-            userRepository.save(user.get());
-            return new QuizResult(user.get().getId(),wr,150,true);
+            if(userRepository.existsById(user.get().getId())){
+                userRepository.save(user.get());
+                return new QuizResult(user.get().getId(),wr,150,true);
+            }
         }
         if(wr>70 && wr<95 ){
             int coinsSum=user.get().getCoins()+170;
             user.get().setCoins(coinsSum);
-            userRepository.save(user.get());
-            return new QuizResult(user.get().getId(),wr,170,true);
+            if(userRepository.existsById(user.get().getId())){
+                userRepository.save(user.get());
+                return new QuizResult(user.get().getId(),wr,170,true);
+            }
         }
         if(wr>95 ){
             int coinsSum=user.get().getCoins()+250;
             user.get().setCoins(coinsSum);
-            userRepository.save(user.get());
-            return new QuizResult(user.get().getId(),wr,250,true);
+            if(userRepository.existsById(user.get().getId())){
+                userRepository.save(user.get());
+                return new QuizResult(user.get().getId(),wr,250,true);
+            }
         }
         else{
             return new QuizResult(user.get().getId(),wr,0,false);
         }
-
+        return null;
     }
 
     public List<QuizCard> getRandomQuizCards(String genre){

@@ -3,6 +3,7 @@ package com.knowledgeknockout.kk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.knowledgeknockout.kk.DTO.SoloQuizDTO;
 import com.knowledgeknockout.kk.Help.QuizResult;
 import com.knowledgeknockout.kk.entity.QuizCard;
 import com.knowledgeknockout.kk.entity.User;
@@ -102,7 +103,7 @@ public class QuizCardControllerTests {
 
     @Test
     public void soloQuizAllRight() throws Exception{
-        Optional <User> user= userRepository.findById(0);
+        Optional <User> user= userRepository.findById(1);
 
         Map<Long,String> soloQuizCards=new HashMap<>();
         soloQuizCards.put(52L,"Levent");
@@ -124,7 +125,7 @@ public class QuizCardControllerTests {
 
     @Test
     public void soloQuizSixOfTen() throws Exception{
-        Optional <User> user= userRepository.findById(0);
+        Optional <User> user= userRepository.findById(1);
 
         Map<Long,String> soloQuizCards=new HashMap<>();
         soloQuizCards.put(52L,"Levent");
@@ -166,5 +167,58 @@ public class QuizCardControllerTests {
         assertNotNull(result);
         assertFalse(result.isWL());
 
+    }
+
+    @Test
+    public void getRandomQuizzes() throws Exception {
+        mockMvc.perform(get("/quizCard/randomQuestion/INFORMATICS")
+                        .with(csrf())
+                        .with(user("testUser").password("password")))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    public void getRandomQuizzesNotFound() throws Exception {
+        mockMvc.perform(get("/quizCard/randomQuestion/HISTORY")
+                        .with(csrf())
+                        .with(user("testUser").password("password")))
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
+
+    @Test
+    public void getRandomQuizzesBadReq() throws Exception {
+        mockMvc.perform(get("/quizCard/randomQuestion/HALLO")
+                        .with(csrf())
+                        .with(user("testUser").password("password")))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    public void soloQuizController() throws Exception{
+        Optional <User> user= userRepository.findById(1);
+        Map<Long,String> soloQuizCards=new HashMap<>();
+        soloQuizCards.put(52L,"Levent");
+        soloQuizCards.put(102L,"Leventdaw");
+        soloQuizCards.put(152L,"adkandiadn");
+        soloQuizCards.put(202L,"bahdba");
+        soloQuizCards.put(252L,"Ldsddsdde");
+        soloQuizCards.put(302L,"Led");
+        soloQuizCards.put(352L,"dabjdaid");
+        soloQuizCards.put(402L,"adnaidji");
+        soloQuizCards.put(452L,"gbjbda");
+        soloQuizCards.put(502L,"dadanb");
+
+        SoloQuizDTO soloQuizDTO= new SoloQuizDTO(user,soloQuizCards);
+        String quizJson = objectMapper.writeValueAsString(soloQuizDTO);
+
+        mockMvc.perform(put("/quizCard/soloQuiz")
+                        .with(csrf())
+                        .with(user("testUser").password("password"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(quizJson))
+                .andExpect(status().isOk());
     }
 }
