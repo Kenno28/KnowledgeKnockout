@@ -7,3 +7,5 @@ const url= `${process.env.REACT_APP_API_SERVER_URL}/quizCard/randomQuestion/${ge
     });
     return response.json();
 }
+
+export async function createQuizCard(genre:String){}
